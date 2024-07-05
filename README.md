@@ -1,49 +1,49 @@
 # Twitchy Discord Bot
 
-## Übersicht
+## Overview
 
-Twitchy ist ein Discord-Bot, der den Online-Status von Twitch-Streamern überwachen kann und Benachrichtigungen im Discord-Server sendet, wenn ein Streamer online geht. Der Bot bietet auch Befehle zum Hinzufügen und Entfernen von Twitch-Kanälen, die überwacht werden sollen, sowie zum Abrufen von Informationen zu einem Twitch-Nutzer.
+Twitchy is a Discord bot that can monitor the online status of Twitch streamers and send notifications in the Discord server when a streamer goes live. The bot also offers commands to add and remove Twitch channels to be monitored, as well as to retrieve information about a Twitch user.
 
-## Voraussetzungen
+## Prerequisites
 
 - Python 3.x
 - Discord Bot Token
-- Twitch Client ID und Client Secret
+- Twitch Client ID and Client Secret
 
 ## Installation
 
-### 1. Repository klonen
+### 1. Clone the repository
 
-Klone das Repository und wechsle in das Verzeichnis:
+Clone the repository and change to the directory:
 
 ```sh
-git clone https://github.com/dein-username/twitchy.git
+git clone https://github.com/<your-username>/twitchy.git
 cd twitchy
 ```
-### 2. Virtuelle Umgebung erstellen und aktivieren
+### 2. Create and activate a virtual environment
 
-Erstelle eine virtuelle Umgebung und aktiviere sie:
+Create a virtual environment and activate it:
 
 
 ```sh
 python -m venv venv
-source venv/bin/activate  # Auf Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
-### 3. Abhängigkeiten installieren
+### 3. Install dependencies
 
-Installiere die notwendigen Abhängigkeiten:
+Install the necessary dependencies:
 
 ```sh
 pip install -r requirements.txt
 ```
-### 4. .env Datei erstellen
+### 4. Create .env file
 
-Kopiere die Datei .env.example zu .env und füge deine eigenen Werte ein:
+Copy the .env.example file to .env
 
 ```sh
 cp .env.example .env
 ```
-Bearbeite die .env Datei und füge deine eigenen Werte hinzu:
+Edit the .env file and add your own values:
 
 
 ```plaintext
@@ -51,55 +51,58 @@ DISCORD_TOKEN=your_discord_token_here
 TWITCH_CLIENT_ID=your_twitch_client_id_here
 TWITCH_CLIENT_SECRET=your_twitch_client_secret_here
 ```
-## Verwendung
+## Usage
 
-Starte den Bot:
+Start the bot:
 
 ```sh
 python app.py
 ```
-Befehle
+Commands
 
-    !set_command_channel: Setzt den aktuellen Kanal als Befehlskanal.
-    !set_message_channel: Setzt den aktuellen Kanal als Nachrichtkanal.
-    !new_channel <username>: Fügt einen neuen Twitch-Kanal zur Überwachungsliste hinzu.
-    !delete_channel <username>: Entfernt einen Twitch-Kanal von der Überwachungsliste.
-    !twitch <username>: Gibt Informationen zu einem Twitch-Nutzer aus.
+    !set_command_channel: Sets the current channel as the command channel.
+    !set_message_channel: Sets the current channel as the message channel.
+    !new_channel <username>: Adds a new Twitch channel to the monitoring list.
+    !delete_channel <username>: Removes a Twitch channel from the monitoring list.
+    !twitch <username>: Provides information about a Twitch user.
 
-## Beispiel
+## Example
 
-Setze den Befehlskanal:
+Set the command channel:
 
-In einem Discord-Kanal, den du als Befehlskanal festlegen möchtest, schreibe:
+In a Discord channel that you want to set as the command channel:
+(Can not be changed afterwards in this version)
 
     !set_command_channel
 
-Setze den Nachrichtkanal:
+Set the message channel:
 
-In einem Discord-Kanal, in dem du Benachrichtigungen erhalten möchtest, schreibe:
+In a Discord channel where you want to receive notifications:
+(Can not be changed afterwards in this version)
 
     !set_message_channel
 
-Füge einen Twitch-Kanal hinzu:
+Add a Twitch channel:
 
-Um einen Twitch-Kanal zur Überwachungsliste hinzuzufügen, schreibe:
+To add a Twitch channel to the monitoring list:
 
     !new_channel user_1337
 
-Entferne einen Twitch-Kanal:
+Remove a Twitch channel:
 
-Um einen Twitch-Kanal von der Überwachungsliste zu entfernen, schreibe:
+To remove a Twitch channel from the monitoring list:
 
     !delete_channel user_1337
 
-Hole Informationen zu einem Twitch-Nutzer:
+Get information about a Twitch user:
 
-Um Informationen zu einem Twitch-Nutzer zu erhalten, schreibe:
+To get information about a Twitch user:
 
     !twitch user_1337
 
-## Entwicklung
-### Ordnerstruktur
+## Development
+
+### Folder Structure
 
 ```
 twitchy/
@@ -115,18 +118,17 @@ twitchy/
 └── README.md
 ```
 
-## Beschreibung der Dateien
+## Description of Files
 
-    app.py: Der Einstiegspunkt des Bots. Initialisiert den Bot, lädt Konfigurationen und startet die Tasks.
-    config.py: Beinhaltet Funktionen zum Laden und Speichern der Konfiguration und der Kanalliste.
-    twitch.py: Beinhaltet Funktionen zur Kommunikation mit der Twitch-API.
-    commands.py: Definiert die Discord-Befehle.
-    tasks.py: Definiert die Hintergrundtasks zum Überprüfen des Online-Status der Twitch-Kanäle.
-    utils.py: Beinhaltet Hilfsfunktionen.
-    .env.example: Beispiel für die .env Datei mit den notwendigen Umgebungsvariablen.
-    requirements.txt: Beinhaltet die benötigten Python-Pakete.
-    README.md: Diese Datei, die das Projekt beschreibt und Anweisungen zur Installation und Verwendung gibt.
+    app.py: The entry point of the bot. Initializes the bot, loads configurations, and starts the tasks.
+    config.py: Contains functions for loading and saving the configuration and channel list.
+    twitch.py: Contains functions for communicating with the Twitch API.
+    commands.py: Defines the Discord commands.
+    tasks.py: Defines the background tasks for checking the online status of Twitch channels.
+    utils.py: Contains utility functions.
+    .env.example: Example .env file with the necessary environment variables.
+    requirements.txt: Contains the required Python packages.
+    README.md: This file, which describes the project and provides instructions for installation and usage.
 
-## Entwickler
-
+## Developer
 ### John Klose
