@@ -69,8 +69,6 @@ def is_user_online(username):
         return False
 
 def get_twitch_api_headers():
-    # Hier sollten die notwendigen Header für die Twitch API-Aufrufe generiert werden
-    # Dies könnte z.B. eine OAuth-Token-Authentifizierung beinhalten
     return {
         'Client-ID': TWITCH_CLIENT_ID,
         'Authorization': f'Bearer {twitch_token}'
