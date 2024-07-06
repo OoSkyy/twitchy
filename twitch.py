@@ -1,6 +1,8 @@
 import requests
 import os
 from dotenv import load_dotenv
+from config import config
+import requests
 
 load_dotenv()
 TWITCH_CLIENT_ID = os.getenv('TWITCH_CLIENT_ID')
@@ -65,3 +67,34 @@ def is_user_online(username):
     except requests.exceptions.RequestException as e:
         print(f"Error while getting online_status for: {username}: {e}")
         return False
+
+def get_twitch_api_headers():
+    # Hier sollten die notwendigen Header für die Twitch API-Aufrufe generiert werden
+    # Dies könnte z.B. eine OAuth-Token-Authentifizierung beinhalten
+    return {
+        'Client-ID': TWITCH_CLIENT_ID,
+        'Authorization': f'Bearer {twitch_token}'
+    }
+
+def get_stream_info(username):
+    headers = get_twitch_api_headers()
+    user_info_response = requests.get(f"https://api.twitch.tv/helix/users?login={username}", headers=headers)
+    user_info = user_info_response.json()
+
+    if 'data' not in user_info or len(user_info['data']) == 0:
+        return {'online': False}
+
+    user_id = user_info['data'][0]['id']
+    stream_info_response = requests.get(f"https://api.twitch.tv/helix/streams?user_id={user_id}", headers=headers)
+    stream_info = stream_info_response.json()
+
+    if stream_info['data']:
+        stream = stream_info['data'][0]
+        return {
+            'online': True,
+            'title': stream['title'],
+            'game': stream['game_name'],
+            'url': f"https://www.twitch.tv/{username}"
+        }
+    else:
+        return {'online': False}
