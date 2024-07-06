@@ -16,14 +16,16 @@ def setup_tasks(bot):
         channel = bot.get_channel(config["MESSAGE_CHANNEL_ID"])
         
         for username in twitch_usernames:
-            currently_online = is_user_online(username)
+            user_status = is_user_online(username)
+            currently_online = user_status.get('online')
+            stream_url = user_status.get('url', f"https://www.twitch.tv/{username}")
+            
             print(f"{username} currently online: {currently_online}, last status: {last_status.get(username)}")
             if currently_online and last_status.get(username) != 'online':
                 print(f"Sending online message for {username}")
-                await channel.send(f"{username} ist online!")
-                last_status[username] = 'online' # no messages when user was online messaged already in this session
+                await channel.send(f"{username} is online! Watch the stream here: {stream_url}")
+                last_status[username] = 'online'
             elif not currently_online and last_status.get(username) != 'offline':
                 last_status[username] = 'offline'
-                # No message when user is offline
 
     return check_online_status
