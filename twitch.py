@@ -21,7 +21,7 @@ def get_twitch_token():
         response.raise_for_status()
         twitch_token = response.json()['access_token']
     except requests.exceptions.RequestException as e:
-        print(f"Fehler beim Abrufen des Twitch-Tokens: {e}")
+        print(f"Error while getting the token: {e}")
 
 def get_twitch_user_info(username):
     if not twitch_token:
@@ -43,7 +43,7 @@ def get_twitch_user_info(username):
         else:
             return None
     except requests.exceptions.RequestException as e:
-        print(f"Fehler beim Abrufen der Twitch-Nutzerinformationen für {username}: {e}")
+        print(f"Error while getting userinformation for: {username}: {e}")
         return None
 
 def is_user_online(username):
@@ -63,5 +63,5 @@ def is_user_online(username):
         data = response.json()['data']
         return len(data) > 0 and data[0]['type'] == 'live'
     except requests.exceptions.RequestException as e:
-        print(f"Fehler beim Abrufen des Twitch-Status für {username}: {e}")
+        print(f"Error while getting online_status for: {username}: {e}")
         return False

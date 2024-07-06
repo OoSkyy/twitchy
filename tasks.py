@@ -9,21 +9,21 @@ def setup_tasks(bot):
     @tasks.loop(minutes=5)
     async def check_online_status():
         if not is_configured():
-            print("Der Bot ist noch nicht konfiguriert.")
+            print("Twitchy is not configured yet.")
             return
         
-        print("Checking online status...")  # Debugging-Ausgabe
+        print("Checking online status...")
         channel = bot.get_channel(config["MESSAGE_CHANNEL_ID"])
         
         for username in twitch_usernames:
             currently_online = is_user_online(username)
-            print(f"{username} currently online: {currently_online}, last status: {last_status.get(username)}")  # Debugging-Ausgabe
+            print(f"{username} currently online: {currently_online}, last status: {last_status.get(username)}")
             if currently_online and last_status.get(username) != 'online':
-                print(f"Sending online message for {username}")  # Debugging-Ausgabe
+                print(f"Sending online message for {username}")
                 await channel.send(f"{username} ist online!")
-                last_status[username] = 'online'
+                last_status[username] = 'online' # no messages when user was online messaged already in this session
             elif not currently_online and last_status.get(username) != 'offline':
                 last_status[username] = 'offline'
-                # Keine Nachricht senden, wenn Benutzer offline ist
+                # No message when user is offline
 
     return check_online_status
