@@ -8,25 +8,25 @@ from config import save_config, save_channels
 from commands import setup_commands
 from tasks import setup_tasks
 
-# Umgebungsvariablen laden
+# load env variables
 load_dotenv()
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 
-# Intents erstellen und konfigurieren
+# create intents and configure
 intents = discord.Intents.default()
-intents.message_content = True  # Erlaube den Zugriff auf den Nachrichteninhalt
+intents.message_content = True  # allow access to messages
 
-# Bot-Instanz erstellen
+# create bot instance
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-# Bot-Event zum Starten
+# event for bot start
 @bot.event
 async def on_ready():
     print(f'Bot ist eingeloggt als {bot.user.name}')
     if not check_online_status.is_running():
-        check_online_status.start()  # Startet den Hintergrundtask
+        check_online_status.start()  # start background task
 
-# Bot-Event zum Abschalten
+# event for deactivate the bot
 @bot.event
 async def on_disconnect():
     global twitch_usernames
@@ -39,5 +39,4 @@ setup_commands(bot)
 # Setup Tasks
 check_online_status = setup_tasks(bot)
 
-# Bot ausführen
 bot.run(DISCORD_TOKEN)
