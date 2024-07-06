@@ -16,9 +16,8 @@ def setup_tasks(bot):
         channel = bot.get_channel(config["MESSAGE_CHANNEL_ID"])
         
         for username in twitch_usernames:
-            user_status = is_user_online(username)
-            currently_online = user_status.get('online')
-            stream_url = user_status.get('url', f"https://www.twitch.tv/{username}")
+            currently_online = is_user_online(username)
+            stream_url = f"https://www.twitch.tv/{username}"
             
             print(f"{username} currently online: {currently_online}, last status: {last_status.get(username)}")
             if currently_online and last_status.get(username) != 'online':
