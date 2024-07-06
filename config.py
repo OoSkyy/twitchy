@@ -9,7 +9,7 @@ config = {
     "MESSAGE_CHANNEL_ID": None
 }
 
-# Initialisiere die Variablen global
+# Initialise global variables
 twitch_usernames = []
 last_status = {}
 
@@ -18,19 +18,19 @@ def load_config():
     if os.path.isfile(CONFIG_FILE):
         with open(CONFIG_FILE, 'r') as f:
             config = json.load(f)
-        print(f"Geladene Konfiguration: {config}")
+        print(f"Loaded config: {config}")
 
 def save_config():
     with open(CONFIG_FILE, 'w') as f:
         json.dump(config, f)
-    print("Konfiguration gespeichert")
+    print("Saved config")
 
 def load_channels():
     global twitch_usernames
     if os.path.isfile(CHANNELS_FILE):
         with open(CHANNELS_FILE, 'r') as f:
             twitch_usernames = json.load(f)
-        print(f"Geladene Kanäle: {twitch_usernames}")
+        print(f"Loaded channels: {twitch_usernames}")
     else:
         twitch_usernames = []
 
@@ -38,7 +38,7 @@ def save_channels():
     global twitch_usernames
     with open(CHANNELS_FILE, 'w') as f:
         json.dump(twitch_usernames, f)
-    print("Kanalliste gespeichert")
+    print("Channels saved")
 
 load_config()
 load_channels()
