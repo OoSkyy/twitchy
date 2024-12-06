@@ -36,7 +36,7 @@ def setup_tasks(bot):
             if currently_online and last_status.get(username) != 'online':
                 print(f"Sending online message for {username}")
                 await channel.send(
-                    f"{username} ist online!\n\n"
+                    f"@here {username} ist online!\n\n"
                     f"**Title:** {stream_title}\n"
                     f"**Game:** {stream_game}\n"
                     f"Watch here: {stream_url}"
